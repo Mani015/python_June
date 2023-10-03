@@ -8,3 +8,6 @@ Newfile = open('Addfile2','w')
 for i in Read:
     print(Newfile.write(i))
 
+
+
+
