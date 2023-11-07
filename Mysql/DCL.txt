@@ -1,0 +1,308 @@
+Microsoft Windows [Version 10.0.19045.3570]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Test>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| clincidb           |
+| information_schema |
+| mysql              |
+| patient            |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+7 rows in set (0.03 sec)
+
+mysql> create table customer(sno int,cfname varchar(20),clname varchar(20),phn int,address varchar(30),amount int);
+ERROR 1046 (3D000): No database selected
+mysql> create database customer;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use customer;
+Database changed
+mysql> create table customer(sno int,cfname varchar(20),clname varchar(20),phn int,address varchar(30),amount int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sno     | int         | YES  |     | NULL    |       |
+| cfname  | varchar(20) | YES  |     | NULL    |       |
+| clname  | varchar(20) | YES  |     | NULL    |       |
+| phn     | int         | YES  |     | NULL    |       |
+| address | varchar(30) | YES  |     | NULL    |       |
+| amount  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> insert into customer values(1,'martin','guptil',1234,'canada',500);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from customer;
++------+--------+--------+------+---------+--------+
+| sno  | cfname | clname | phn  | address | amount |
++------+--------+--------+------+---------+--------+
+|    1 | martin | guptil | 1234 | canada  |    500 |
++------+--------+--------+------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> create user jhansi identifiedy by 'rani';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'identifiedy by 'rani'' at line 1
+mysql> create user jhansi identified by 'rani';
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> grant insert on customer to jhansi;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> quit
+Bye
+
+C:\Users\Test>mysql -u jhansi -p;
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'jhansi'@'localhost' (using password: YES)
+
+C:\Users\Test>mysql -u jhansi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| customer           |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer;
+ERROR 1046 (3D000): No database selected
+mysql> use customer;
+Database changed
+mysql> select * from customer;
+ERROR 1142 (42000): SELECT command denied to user 'jhansi'@'localhost' for table 'customer'
+mysql> desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sno     | int         | YES  |     | NULL    |       |
+| cfname  | varchar(20) | YES  |     | NULL    |       |
+| clname  | varchar(20) | YES  |     | NULL    |       |
+| phn     | int         | YES  |     | NULL    |       |
+| address | varchar(30) | YES  |     | NULL    |       |
+| amount  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into customer values(2,'matthew','paul',12234,'usa',1000),(3,'mark','steven',02933,'chicago',250);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
+ERROR 1142 (42000): SELECT command denied to user 'jhansi'@'localhost' for table 'customer'
+mysql> update customer set amount=100 where sno=3;
+ERROR 1142 (42000): UPDATE command denied to user 'jhansi'@'localhost' for table 'customer'
+mysql> delete from customer where cfname = 'mark';
+ERROR 1142 (42000): DELETE command denied to user 'jhansi'@'localhost' for table 'customer'
+mysql> ^C
+mysql> quit
+Bye
+
+C:\Users\Test>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use customer;
+Database changed
+mysql> select * from customer;
++------+---------+--------+-------+---------+--------+
+| sno  | cfname  | clname | phn   | address | amount |
++------+---------+--------+-------+---------+--------+
+|    1 | martin  | guptil |  1234 | canada  |    500 |
+|    2 | matthew | paul   | 12234 | usa     |   1000 |
+|    3 | mark    | steven |  2933 | chicago |    250 |
++------+---------+--------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> grant select,update,delete on customer to jhansi;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> quit
+Bye
+
+C:\Users\Test>mysql -u jhansi -p;
+mysql: [Warning] Using a password on the command line interface can be insecure.
+ERROR 1045 (28000): Access denied for user 'jhansi'@'localhost' (using password: YES)
+
+C:\Users\Test>mysql -u jhansi -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use customer;
+Database changed
+mysql> select * from customer;
++------+---------+--------+-------+---------+--------+
+| sno  | cfname  | clname | phn   | address | amount |
++------+---------+--------+-------+---------+--------+
+|    1 | martin  | guptil |  1234 | canada  |    500 |
+|    2 | matthew | paul   | 12234 | usa     |   1000 |
+|    3 | mark    | steven |  2933 | chicago |    250 |
++------+---------+--------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from customer where sno = 3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> update customer set phn=112233 where address = 'usa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++------+---------+--------+--------+---------+--------+
+| sno  | cfname  | clname | phn    | address | amount |
++------+---------+--------+--------+---------+--------+
+|    1 | martin  | guptil |   1234 | canada  |    500 |
+|    2 | matthew | paul   | 112233 | usa     |   1000 |
++------+---------+--------+--------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> insert into customer values(4,'girish','kumar',1234567890,'chittor',120);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> quit
+Bye
+
+C:\Users\Test>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use customer;
+Database changed
+mysql> select * from customer;
++------+---------+--------+------------+---------+--------+
+| sno  | cfname  | clname | phn        | address | amount |
++------+---------+--------+------------+---------+--------+
+|    1 | martin  | guptil |       1234 | canada  |    500 |
+|    2 | matthew | paul   |     112233 | usa     |   1000 |
+|    4 | girish  | kumar  | 1234567890 | chittor |    120 |
+|    5 | padma   | priya  |     123456 | kadapa  |    200 |
+|    6 | devi    | sritha |     556677 | nellore |    500 |
++------+---------+--------+------------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> set autocommit = 0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into customer values(7,'jhansi','rani',7890,'annavaram',900);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++------+---------+--------+------------+-----------+--------+
+| sno  | cfname  | clname | phn        | address   | amount |
++------+---------+--------+------------+-----------+--------+
+|    1 | martin  | guptil |       1234 | canada    |    500 |
+|    2 | matthew | paul   |     112233 | usa       |   1000 |
+|    4 | girish  | kumar  | 1234567890 | chittor   |    120 |
+|    5 | padma   | priya  |     123456 | kadapa    |    200 |
+|    6 | devi    | sritha |     556677 | nellore   |    500 |
+|    7 | jhansi  | rani   |       7890 | annavaram |    900 |
++------+---------+--------+------------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> insert into customer values(8,'prasad','kumar',12567890,'tirupathi',1200);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++------+---------+--------+------------+-----------+--------+
+| sno  | cfname  | clname | phn        | address   | amount |
++------+---------+--------+------------+-----------+--------+
+|    1 | martin  | guptil |       1234 | canada    |    500 |
+|    2 | matthew | paul   |     112233 | usa       |   1000 |
+|    4 | girish  | kumar  | 1234567890 | chittor   |    120 |
+|    5 | padma   | priya  |     123456 | kadapa    |    200 |
+|    6 | devi    | sritha |     556677 | nellore   |    500 |
+|    7 | jhansi  | rani   |       7890 | annavaram |    900 |
+|    8 | prasad  | kumar  |   12567890 | tirupathi |   1200 |
++------+---------+--------+------------+-----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delete from customer where amount = 1000;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from customer;
++------+--------+--------+------------+-----------+--------+
+| sno  | cfname | clname | phn        | address   | amount |
++------+--------+--------+------------+-----------+--------+
+|    1 | martin | guptil |       1234 | canada    |    500 |
+|    4 | girish | kumar  | 1234567890 | chittor   |    120 |
+|    5 | padma  | priya  |     123456 | kadapa    |    200 |
+|    6 | devi   | sritha |     556677 | nellore   |    500 |
+|    7 | jhansi | rani   |       7890 | annavaram |    900 |
+|    8 | prasad | kumar  |   12567890 | tirupathi |   1200 |
++------+--------+--------+------------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
