@@ -1,0 +1,571 @@
+Microsoft Windows [Version 10.0.19045.3570]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Test>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.33 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| clincidb           |
+| customer           |
+| information_schema |
+| meow               |
+| mysql              |
+| patient            |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+9 rows in set (0.12 sec)
+
+mysql> use meow;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_meow |
++----------------+
+| stu            |
++----------------+
+1 row in set (0.02 sec)
+
+mysql> select * from stu;
++------+----------+--------+-----------+---------+
+| SID  | FNAME    | LNAME  | LOCATION  | PHNO    |
++------+----------+--------+-----------+---------+
+|   11 | jhansi   | rani   | annvaram  |   12345 |
+|   12 | devi     | sritha | nellore   |   23456 |
+|   13 | thamara  | selvi  | chennai   |    3456 |
+|   14 | padma    | priya  | smartcity | 1234567 |
+|   15 | gowthami | goud   | mumbai    |   34567 |
+|   18 | bala     | raju   | tirupathi |     112 |
++------+----------+--------+-----------+---------+
+6 rows in set (0.03 sec)
+
+mysql> insert into stu values(19,'martin','luthar','pune',112233),(20,'laxmi','venkata','kakinada',000111),(21,'anusha','tellakula','vijayawada',23456);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from stu;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select sid,fname from stu;
++------+----------+
+| sid  | fname    |
++------+----------+
+|   11 | jhansi   |
+|   12 | devi     |
+|   13 | thamara  |
+|   14 | padma    |
+|   15 | gowthami |
+|   18 | bala     |
+|   19 | martin   |
+|   20 | laxmi    |
+|   21 | anusha   |
++------+----------+
+9 rows in set (0.00 sec)
+
+mysql> select sid,fname,lname,phno from stu;
++------+----------+-----------+---------+
+| sid  | fname    | lname     | phno    |
++------+----------+-----------+---------+
+|   11 | jhansi   | rani      |   12345 |
+|   12 | devi     | sritha    |   23456 |
+|   13 | thamara  | selvi     |    3456 |
+|   14 | padma    | priya     | 1234567 |
+|   15 | gowthami | goud      |   34567 |
+|   18 | bala     | raju      |     112 |
+|   19 | martin   | luthar    |  112233 |
+|   20 | laxmi    | venkata   |     111 |
+|   21 | anusha   | tellakula |   23456 |
++------+----------+-----------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select phno from stu;
++---------+
+| phno    |
++---------+
+|   12345 |
+|   23456 |
+|    3456 |
+| 1234567 |
+|   34567 |
+|     112 |
+|  112233 |
+|     111 |
+|   23456 |
++---------+
+9 rows in set (0.00 sec)
+
+mysql> select distinct from stu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from stu' at line 1
+mysql> select distinct phno from stu;
++---------+
+| phno    |
++---------+
+|   12345 |
+|   23456 |
+|    3456 |
+| 1234567 |
+|   34567 |
+|     112 |
+|  112233 |
+|     111 |
++---------+
+8 rows in set (0.01 sec)
+
+mysql> select distinct from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp' at line 1
+mysql> select distinct from stu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from stu' at line 1
+mysql> select distinct *  from stu;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.01 sec)
+
+mysql> select * from emp limit 5;
+ERROR 1146 (42S02): Table 'meow.emp' doesn't exist
+mysql> select * from stu limit 5;
++------+----------+--------+-----------+---------+
+| SID  | FNAME    | LNAME  | LOCATION  | PHNO    |
++------+----------+--------+-----------+---------+
+|   11 | jhansi   | rani   | annvaram  |   12345 |
+|   12 | devi     | sritha | nellore   |   23456 |
+|   13 | thamara  | selvi  | chennai   |    3456 |
+|   14 | padma    | priya  | smartcity | 1234567 |
+|   15 | gowthami | goud   | mumbai    |   34567 |
++------+----------+--------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select fname from stu limit 20;
++----------+
+| fname    |
++----------+
+| jhansi   |
+| devi     |
+| thamara  |
+| padma    |
+| gowthami |
+| bala     |
+| martin   |
+| laxmi    |
+| anusha   |
++----------+
+9 rows in set (0.00 sec)
+
+mysql> select fname,phno from stu limit 7;
++----------+---------+
+| fname    | phno    |
++----------+---------+
+| jhansi   |   12345 |
+| devi     |   23456 |
+| thamara  |    3456 |
+| padma    | 1234567 |
+| gowthami |   34567 |
+| bala     |     112 |
+| martin   |  112233 |
++----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from stu sid>12;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>12' at line 1
+mysql> select * from stu where sid > 12;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+7 rows in set (0.01 sec)
+
+mysql> select * from stu where sid >= 12;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from stu where sid < 12;
++------+--------+-------+----------+-------+
+| SID  | FNAME  | LNAME | LOCATION | PHNO  |
++------+--------+-------+----------+-------+
+|   11 | jhansi | rani  | annvaram | 12345 |
++------+--------+-------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from stu where sid <= 12;
++------+--------+--------+----------+-------+
+| SID  | FNAME  | LNAME  | LOCATION | PHNO  |
++------+--------+--------+----------+-------+
+|   11 | jhansi | rani   | annvaram | 12345 |
+|   12 | devi   | sritha | nellore  | 23456 |
++------+--------+--------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from stu where sid not 12;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '12' at line 1
+mysql> select * from stu where sid != 12;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from stu where sid != 15;
++------+---------+-----------+------------+---------+
+| SID  | FNAME   | LNAME     | LOCATION   | PHNO    |
++------+---------+-----------+------------+---------+
+|   11 | jhansi  | rani      | annvaram   |   12345 |
+|   12 | devi    | sritha    | nellore    |   23456 |
+|   13 | thamara | selvi     | chennai    |    3456 |
+|   14 | padma   | priya     | smartcity  | 1234567 |
+|   18 | bala    | raju      | tirupathi  |     112 |
+|   19 | martin  | luthar    | pune       |  112233 |
+|   20 | laxmi   | venkata   | kakinada   |     111 |
+|   21 | anusha  | tellakula | vijayawada |   23456 |
++------+---------+-----------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from stu where fname != 'martin';
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+8 rows in set (0.01 sec)
+
+mysql> select * from stu where fname not 'martin';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''martin'' at line 1
+mysql> select * from stu where fname != 'martin';
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from stu where fname='devi' and phno = 12345;
+Empty set (0.00 sec)
+
+mysql> select * from stu where fname='devi' and phno = 23456;
++------+-------+--------+----------+-------+
+| SID  | FNAME | LNAME  | LOCATION | PHNO  |
++------+-------+--------+----------+-------+
+|   12 | devi  | sritha | nellore  | 23456 |
++------+-------+--------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from stu where sid = 14 and location = 'mumbai';
+Empty set (0.00 sec)
+
+mysql> select * from stu where sid = 14 or location = 'mumbai';
++------+----------+-------+-----------+---------+
+| SID  | FNAME    | LNAME | LOCATION  | PHNO    |
++------+----------+-------+-----------+---------+
+|   14 | padma    | priya | smartcity | 1234567 |
+|   15 | gowthami | goud  | mumbai    |   34567 |
++------+----------+-------+-----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from stu where fname='joseph' or location = 'annavaram';
+Empty set (0.00 sec)
+
+mysql> select * from stu where fname='joseph' or location = 'annvaram';
++------+--------+-------+----------+-------+
+| SID  | FNAME  | LNAME | LOCATION | PHNO  |
++------+--------+-------+----------+-------+
+|   11 | jhansi | rani  | annvaram | 12345 |
++------+--------+-------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from stu where not sid = 12;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from stu where sid = 11 or fname= 'bala' or phno = 12345;
++------+--------+-------+-----------+-------+
+| SID  | FNAME  | LNAME | LOCATION  | PHNO  |
++------+--------+-------+-----------+-------+
+|   11 | jhansi | rani  | annvaram  | 12345 |
+|   18 | bala   | raju  | tirupathi |   112 |
++------+--------+-------+-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from stu where sid in(11,15,16);
++------+----------+-------+----------+-------+
+| SID  | FNAME    | LNAME | LOCATION | PHNO  |
++------+----------+-------+----------+-------+
+|   11 | jhansi   | rani  | annvaram | 12345 |
+|   15 | gowthami | goud  | mumbai   | 34567 |
++------+----------+-------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from stu where fname in('jhansi','laxmi','padma','anusha','devi')
+    -> \g
++------+--------+-----------+------------+---------+
+| SID  | FNAME  | LNAME     | LOCATION   | PHNO    |
++------+--------+-----------+------------+---------+
+|   11 | jhansi | rani      | annvaram   |   12345 |
+|   12 | devi   | sritha    | nellore    |   23456 |
+|   14 | padma  | priya     | smartcity  | 1234567 |
+|   20 | laxmi  | venkata   | kakinada   |     111 |
+|   21 | anusha | tellakula | vijayawada |   23456 |
++------+--------+-----------+------------+---------+
+5 rows in set (0.01 sec)
+
+mysql> select * from stu where sid between(11 to 15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to 15)' at line 1
+mysql> select * from stu where between sid(11 to 15);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'between sid(11 to 15)' at line 1
+mysql> select * from stu where sid between 11 to 15;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to 15' at line 1
+mysql> select * from stu where sid between 11 to 15;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to 15' at line 1
+mysql> SELECT * FROM Products
+    -> ;
+ERROR 1146 (42S02): Table 'meow.products' doesn't exist
+mysql> select * from stu where sid between 11 and 15;
++------+----------+--------+-----------+---------+
+| SID  | FNAME    | LNAME  | LOCATION  | PHNO    |
++------+----------+--------+-----------+---------+
+|   11 | jhansi   | rani   | annvaram  |   12345 |
+|   12 | devi     | sritha | nellore   |   23456 |
+|   13 | thamara  | selvi  | chennai   |    3456 |
+|   14 | padma    | priya  | smartcity | 1234567 |
+|   15 | gowthami | goud   | mumbai    |   34567 |
++------+----------+--------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname , phno from stu where phno between 5000 and 200000;
++----------+-----------+--------+
+| fname    | lname     | phno   |
++----------+-----------+--------+
+| jhansi   | rani      |  12345 |
+| devi     | sritha    |  23456 |
+| gowthami | goud      |  34567 |
+| martin   | luthar    | 112233 |
+| anusha   | tellakula |  23456 |
++----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select fname,lname , phno from stu where phno between 5000 and 20000;
++--------+-------+-------+
+| fname  | lname | phno  |
++--------+-------+-------+
+| jhansi | rani  | 12345 |
++--------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from stu;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select * from stu orderby fname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fname' at line 1
+mysql> select fname from stu orderby fname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'fname' at line 1
+mysql> select fname from stu order by fname;
++----------+
+| fname    |
++----------+
+| anusha   |
+| bala     |
+| devi     |
+| gowthami |
+| jhansi   |
+| laxmi    |
+| martin   |
+| padma    |
+| thamara  |
++----------+
+9 rows in set (0.01 sec)
+
+mysql> select fname from stu order by phno;
++----------+
+| fname    |
++----------+
+| laxmi    |
+| bala     |
+| thamara  |
+| jhansi   |
+| devi     |
+| anusha   |
+| gowthami |
+| martin   |
+| padma    |
++----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from stu order by phno;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select * from stu order by phno desc;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> lock tables stu read;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from stu;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | tirupathi  |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> delete from stu where sid = 11;
+ERROR 1099 (HY000): Table 'stu' was locked with a READ lock and can't be updated
+mysql> update stu set location = 'delhi' where sid = 18;
+ERROR 1099 (HY000): Table 'stu' was locked with a READ lock and can't be updated
+mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update stu set location = 'delhi' where sid = 18;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from stu;
++------+----------+-----------+------------+---------+
+| SID  | FNAME    | LNAME     | LOCATION   | PHNO    |
++------+----------+-----------+------------+---------+
+|   11 | jhansi   | rani      | annvaram   |   12345 |
+|   12 | devi     | sritha    | nellore    |   23456 |
+|   13 | thamara  | selvi     | chennai    |    3456 |
+|   14 | padma    | priya     | smartcity  | 1234567 |
+|   15 | gowthami | goud      | mumbai     |   34567 |
+|   18 | bala     | raju      | delhi      |     112 |
+|   19 | martin   | luthar    | pune       |  112233 |
+|   20 | laxmi    | venkata   | kakinada   |     111 |
+|   21 | anusha   | tellakula | vijayawada |   23456 |
++------+----------+-----------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql>
