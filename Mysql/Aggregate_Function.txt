@@ -1,0 +1,34 @@
+Aggregate fucntion:
+There are 5 here:
+Avg(),count(),max(),min(),sum()
+
+select * from table_name where column > 50000;
+select * from emp where salary > 50000;
+
+count():
+select count(salary) from emp where salary>20000;
+select sum(salary) from emp where salary>30000;
+select avg(salary) from emp where salary>30000;
+select min(salary) from emp where salary>40000;
+select max(salary) from emp where salary>40000;
+--------------------------------------------------------------------------------------
+The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+
+select age,count(age) from emp group by age;
+
+select age,count(age) from emp group by age having age order by age;
+
+select location,count(location) from emp group by location;
+
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID) DESC;
