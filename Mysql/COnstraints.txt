@@ -1,0 +1,155 @@
+MYSQL CONSTRAINTS:
+
+CONSTRAINT: There is a one condition /one rule
+
+WHAT IS DATA_INTEGRITY.....?
+Data integrity means the data contained in the database in accurate,consistent, and reliable .
+To provide data integrity constraints that ensure that the data entered in to the data base [don't be miss used]
+
+TYPES OF DATA:
+1)Declarative / predefined data integrity (using constraints)  {Means null and not null}
+2)Procedure /User_defined data (using trigeers)
+
+How to create constraints in oracle?
+
+column level :
+-------------
+In this method , we are defiend constraints on individual columns.
+1)PRIMARY KEY
+2)FOREIGN KEY
+3).UNIQUE KEY
+4).DEFAULT KEY
+5).CHECK KEY
+6).NOT NULL
+7).AUTO INCREMENT 
+
+
+1).PRIMARY KEY:
+This constraint is used to identify record in a table uniquely.if the column contain primary key constraints, then it cannot be null or duplicate .
+A table can contain only one primary key. It always contains unique vale into a column.
+
+PRIMARY KEY ALTER:
+syn: alter table <table_name>  add primary key(cloumn_name);
+ex: alter table emp add primary_key(id)
+
+PRIMARY KEY DROP:
+alter table <table_name> drop primary_key;
+alter table emp drop primary_key;
+-----------------------------------------------------------------------------------------------------------------------------------------------
+2)FOREIGN KEY : 
+this constraint is used to link two tables together.it is also known as the referencing key a foregien key column matches 
+the primary key field of another table.
+
+sy: CREATE TABLE <TABLE_NAME1>(COL1 DATATA_TYPE PRIMARY KEY,COL2 DATATYPE,COL3 DATATYPE ,COL4 DATATYPE,FOREIGN KEY(COL1) REFERENCE <TABLE_NAME2> COL1);
+
+
+TABLE1: CREATE TABLE DEPARTMENT(DEPID INT PRIMARY_KEY,DEPTNAME VARCHAR(30));
+
+TABLE2 : CREATE TABLE EMP(EMP ID INT PRIMARY KEY,ENAME VARCHAR(45),EAGE INT,EDEPID,INT,FOREIGN KEY(EDEPID)REFERENCES DEPARTMENT (DEPID));
+
+FOREGIN KEY ALTER:
+ALTER TABLE <CHILD_TABLE> ADD FOREIN KEY(COLU-NAME) REFERNCES <PARENT_TABLE> <COLUMN-NAME>;
+EX: ALTER EMP ADD FOREGIN KEY(EDEP ID) REFERENCE <DEPARTMENT> <DEPID>;
+
+
+FOREGIN DROP : 
+ALTER TABLE <TABLE-NAME>  DROP FOREIGN KEY(COLUMN-TABLE);
+
+
+EX: ALTERT TABLE EMPLOYEE DROP FOREIGN KEY(DEPID);
+---------------------------------------------------------------------------------------------------------------------------------------------------
+CHECK KEY: 
+If controls the value in a particular column.
+It ensureces that the inserted value in a column must be satisfied with the given condition in other words,
+[it determines wheather the value associated eith the columns is valid or not with the given condition]
+
+sy:CREATE TABLE-NAME(COL1 INT PRIMARY KEY,COL2 DATATYPE,COL3 DATATYPE CONSTRAINT 'CONSTRAINTNAME' CHECK(CONDTION), COL4 DATATYPE);
+
+EX: CREATE TABLE EMP(EMPID INT PRIMARY-KEY,ENAME VARCHAR(30),EAGE INT CONSTRAINT 'CHK-EAGE' CHECK(EAGE BETWEEN 10 AND 60));
+
+CHECK KEY ALTER:
+SY: ALTER TABLE TABLE ADD CONSTRAINT 'CONSTRAINT-NAME' CHECK KEY(CONDITION);
+
+EX: ALTER TABLE EMP ADD CONSTRAINT CHK-EAGE CHECK KEY(EAGE BETWEEN 18 AND 20);
+
+DROP: 
+ALTER TABLE TABLE-NAME DROP CONSTRAINT CONSTRAINT-NAME;
+
+ALTER TABLE EMP  DROP CONTRAINT CHK-AGE;
+--------------------------------------------------------------------------------------------------------------------------------------------------
+DEFAULT KEY: it means the column must contains a value, incliding null. this constraint is used to set the default value for the particlar column where we have not specified any value.
+
+ex: CREATE TABLE EMP (EID PRIMARY-KEY,ENAME VARHAR(30), EAGE INT DEFAULT 18, ELOCATION INT);
+
+ALTER CHECKKEY:
+ALTER TABLE EMP ALTER EAGE SET DEFAULT 18;
+
+DROP : ALTER TABLE EMP ALTER EAGE DROP DEFAULT;
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+NOT NULL: 
+This constraint specifies that the column cannot have null or empty value .thr below statment creates a table with not null constraints.
+
+ex: create table emp (eid int primary-key ,ename varchar(20),eage int not null);
+
+
+alter not null
+alter table emp change eage  eage int not null;
+
+drop not null:
+alter table emp change eage eage int null;
+
+--------------------------------------------------------------------------------------------------------------
+MySQL AUTO_INCREMENT Keyword
+MySQL uses the AUTO_INCREMENT keyword to perform an auto-increment feature.
+
+By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
+
+The following SQL statement defines the "Personid" column to be an auto-increment primary key field in the "Persons" table:
+
+CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+MySQL UNIQUE Constraint
+The UNIQUE constraint ensures that all values in a column are different.
+
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+
+However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+
+
+
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+To name a UNIQUE constraint, and to define a UNIQUE constraint on multiple columns, use the following SQL syntax:
+
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
