@@ -1,0 +1,606 @@
+
+The INNER JOIN keyword selects records that have matching values in both tables.
+
+SYN:
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+ex: SELECT A1.PRODUCTID,B1.PRODUCTID FROM A1 INNER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID;
++-----------+-----------+
+| PRODUCTID | PRODUCTID |
++-----------+-----------+
+|         1 |         1 |
+|         2 |         2 |
+|         4 |         4 |
+|         3 |         3 |
+|         5 |         5 |
+|         5 |         5 |
+|         6 |         6 |
+|         7 |         7 |
+|         9 |         9 |
+|        13 |        13 |
++-----------+-----------+
+
+ SELECT A1.SNO, A1.SALARY,B1.PRODUCTNAME FROM A1 inner JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID;
++-----+--------+-------------+
+| SNO | SALARY | PRODUCTNAME |
++-----+--------+-------------+
+|   8 |  25000 | APPLE       |
+|   5 |  70000 | SAMSUNG     |
+|  10 |  20200 | VIVO        |
+|   2 |  50000 | REALME      |
+|  11 |  35786 | NOKIA       |
+|   1 |  40000 | NOKIA       |
+|  12 |  35786 | OOPO        |
+|   3 |  34000 | ONEPLUS     |
+|   4 |  57000 | REDME       |
+|   9 |  48000 | CELKON      |
++-----+--------+-------------+
+
+ SELECT A1.SNO, A1.SALARY,B1.PRODUCTNAME FROM A1 inner JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID where a1.salary > 44000;
++-----+--------+-------------+
+| SNO | SALARY | PRODUCTNAME |
++-----+--------+-------------+
+|   5 |  70000 | SAMSUNG     |
+|   2 |  50000 | REALME      |
+|   4 |  57000 | REDME       |
+|   9 |  48000 | CELKON      |
++-----+--------+-------------+
+
+SELECT A1.PRODUCTID,B1.PRODUCTID FROM A1 INNER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID order by a1.productid;
++-----------+-----------+
+| PRODUCTID | PRODUCTID |
++-----------+-----------+
+|         1 |         1 |
+|         2 |         2 |
+|         3 |         3 |
+|         4 |         4 |
+|         5 |         5 |
+|         5 |         5 |
+|         6 |         6 |
+|         7 |         7 |
+|         9 |         9 |
+|        13 |        13 |
++-----------+-----------+
+
+
+SELECT A1.PRODUCTID,B1.PRODUCTID FROM A1 INNER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID order by B1.productid;
++-----------+-----------+
+| PRODUCTID | PRODUCTID |
++-----------+-----------+
+|         1 |         1 |
+|         2 |         2 |
+|         3 |         3 |
+|         4 |         4 |
+|         5 |         5 |
+|         5 |         5 |
+|         6 |         6 |
+|         7 |         7 |
+|         9 |         9 |
+|        13 |        13 |
++-----------+-----------+
+
+ SELECT A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID ;
++---------+---------+-------------+
+| FNAME   | LNAME   | PRODUCTNAME |
++---------+---------+-------------+
+| joseph  | alex    | APPLE       |
+| jhansi  | rani    | SAMSUNG     |
+| venkata | laxmi   | VIVO        |
+| joy     | heaven  | REALME      |
+| DEVI    | SRITHA  | NOKIA       |
+| martin  | luthor  | NOKIA       |
+| NISSY   | PAUL    | OOPO        |
+| melody  | roy     | ONEPLUS     |
+| alex    | andrews | REDME       |
+| king    | david   | CELKON      |
++---------+---------+-------------+
+
+SELECT A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID WHERE A1.FNAME LIKE '%A';
+
+ SELECT A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID WHERE A1.FNAME LIKE '%I';
+
+ SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID order by A1.FNAME;
+
+  SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID order by B1.PRODUCTNAME;
+ 
+SELECT A1.PRODUCTID, B1.PRODUCTID FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID group by B1.PRODUCTID;
+
+
+SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 INNER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID order by A1.FNAME DESC ;
+
+=================================================================================================================
+MySQL RIGHT JOIN Keyword
+The RIGHT JOIN keyword returns all records from the right table (table2), and the matching records (if any) from the left table (table1).
+
+
+SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 RIGHT OUTER JOIN B1 ON
+ A1.PRODUCTID = B1.PRODUCTID order by A1.FNAME DESC ;
+
+SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTNAME FROM A1 RIGHT OUTER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID order by A1.FNAME DESC ;
++-----------+---------+---------+-------------+
+| PRODUCTID | FNAME   | LNAME   | PRODUCTNAME |
++-----------+---------+---------+-------------+
+|         4 | venkata | laxmi   | VIVO        |
+|         6 | NISSY   | PAUL    | OOPO        |
+|         7 | melody  | roy     | ONEPLUS     |
+|         5 | martin  | luthor  | NOKIA       |
+|         5 | martin  | luthor  | SAMSUNG     |
+|        13 | king    | david   | CELKON      |
+|         3 | joy     | heaven  | REALME      |
+|         1 | joseph  | alex    | APPLE       |
+|         2 | jhansi  | rani    | SAMSUNG     |
+|         5 | DEVI    | SRITHA  | NOKIA       |
+|         5 | DEVI    | SRITHA  | SAMSUNG     |
+|         9 | alex    | andrews | REDME       |
+|      NULL | NULL    | NULL    | LAVA        |
+|      NULL | NULL    | NULL    | KARBON      |
+|      NULL | NULL    | NULL    | IPHONE      |
++-----------+---------+---------+-------------+
+=========================================================================================================================
+
+The LEFT JOIN keyword returns all records from the left table (table1), and the matching records (if any) from the right table (table2).
+
+ SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTID,B1.PRODUCTNAME,B1.PRODUCTQUANTITY FROM A1 LEFT OUTER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID order by A1.FNAME DESC ;
++-----------+---------+-----------+-----------+-------------+-----------------+
+| PRODUCTID | FNAME   | LNAME     | PRODUCTID | PRODUCTNAME | PRODUCTQUANTITY |
++-----------+---------+-----------+-----------+-------------+-----------------+
+|         4 | venkata | laxmi     |         4 | VIVO        |              13 |
+|         6 | NISSY   | PAUL      |         6 | OOPO        |              24 |
+|         7 | melody  | roy       |         7 | ONEPLUS     |              30 |
+|         5 | martin  | luthor    |         5 | SAMSUNG     |              20 |
+|         5 | martin  | luthor    |         5 | NOKIA       |              20 |
+|        13 | king    | david     |        13 | CELKON      |              39 |
+|         3 | joy     | heaven    |         3 | REALME      |              16 |
+|         1 | joseph  | alex      |         1 | APPLE       |              10 |
+|         2 | jhansi  | rani      |         2 | SAMSUNG     |              12 |
+|         5 | DEVI    | SRITHA    |         5 | SAMSUNG     |              20 |
+|         5 | DEVI    | SRITHA    |         5 | NOKIA       |              20 |
+|        10 | darla   | ron       |      NULL | NULL        |            NULL |
+|         8 | anusha  | tellakula |      NULL | NULL        |            NULL |
+|         9 | alex    | andrews   |         9 | REDME       |              50 |
++-----------+---------+-----------+-----------+-------------+-----------------+
+14 rows in set (0.00 sec)
+
+
+SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,B1.PRODUCTID,B1.PRODUCTNAME,B1.PRODUCTQUANTITY FROM A1 LEFT OUTER JOIN B1
+ ON A1.PRODUCTID = B1.PRODUCTID WHERE A1.SALARY > 40000 ;
++-----------+--------+---------+-----------+-------------+-----------------+
+| PRODUCTID | FNAME  | LNAME   | PRODUCTID | PRODUCTNAME | PRODUCTQUANTITY |
++-----------+--------+---------+-----------+-------------+-----------------+
+|         3 | joy    | heaven  |         3 | REALME      |              16 |
+|         9 | alex   | andrews |         9 | REDME       |              50 |
+|         2 | jhansi | rani    |         2 | SAMSUNG     |              12 |
+|        13 | king   | david   |        13 | CELKON      |              39 |
++-----------+--------+---------+-----------+-------------+-----------------+
+
+
+
+ SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,A1.SALARY,B1.PRODUCTID,B1.PRODUCTNAME,B1.PRODUCTQUANTITY FROM A1 LEFT OUTER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID WHERE A1.SALARY > 40000 ;
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+| PRODUCTID | FNAME  | LNAME   | SALARY | PRODUCTID | PRODUCTNAME | PRODUCTQUANTITY |
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+|         3 | joy    | heaven  |  50000 |         3 | REALME      |              16 |
+|         9 | alex   | andrews |  57000 |         9 | REDME       |              50 |
+|         2 | jhansi | rani    |  70000 |         2 | SAMSUNG     |              12 |
+|        13 | king   | david   |  48000 |        13 | CELKON      |              39 |
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+
+
+ SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME,A1.SALARY,B1.PRODUCTID,B1.PRODUCTNAME,B1.PRODUCTQUANTITY FROM A1 LEFT OUTER JOIN B1 ON A1.PRODUCTID = B1.PRODUCTID WHERE A1.SALARY > 40000
+    -> ORDER BY A1.SALARY;
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+| PRODUCTID | FNAME  | LNAME   | SALARY | PRODUCTID | PRODUCTNAME | PRODUCTQUANTITY |
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+|        13 | king   | david   |  48000 |        13 | CELKON      |              39 |
+|         3 | joy    | heaven  |  50000 |         3 | REALME      |              16 |
+|         9 | alex   | andrews |  57000 |         9 | REDME       |              50 |
+|         2 | jhansi | rani    |  70000 |         2 | SAMSUNG     |              12 |
++-----------+--------+---------+--------+-----------+-------------+-----------------+
+4 rows in set (0.00 sec)
+
+=========================================================================================================================================
+SQL CROSS JOIN Keyword
+The CROSS JOIN keyword returns all records from both tables (table1 and table2).
+ 
+SELECT A1.PRODUCTID, A1.FNAME,A1.LNAME, B1.PRODUCTID FROM A1 CROSS JOIN B1 ;
++-----------+---------+-----------+-----------+
+| PRODUCTID | FNAME   | LNAME     | PRODUCTID |
++-----------+---------+-----------+-----------+
+|         6 | NISSY   | PAUL      |         1 |
+|         5 | DEVI    | SRITHA    |         1 |
+|         4 | venkata | laxmi     |         1 |
+|        13 | king    | david     |         1 |
+|         1 | joseph  | alex      |         1 |
+|        10 | darla   | ron       |         1 |
+|         8 | anusha  | tellakula |         1 |
+|         2 | jhansi  | rani      |         1 |
+|         9 | alex    | andrews   |         1 |
+|         7 | melody  | roy       |         1 |
+|         3 | joy     | heaven    |         1 |
+|         5 | martin  | luthor    |         1 |
+|         6 | NISSY   | PAUL      |         2 |
+|         5 | DEVI    | SRITHA    |         2 |
+|         4 | venkata | laxmi     |         2 |
+|        13 | king    | david     |         2 |
+|         1 | joseph  | alex      |         2 |
+|        10 | darla   | ron       |         2 |
+|         8 | anusha  | tellakula |         2 |
+|         2 | jhansi  | rani      |         2 |
+|         9 | alex    | andrews   |         2 |
+|         7 | melody  | roy       |         2 |
+|         3 | joy     | heaven    |         2 |
+|         5 | martin  | luthor    |         2 |
+|         6 | NISSY   | PAUL      |         4 |
+|         5 | DEVI    | SRITHA    |         4 |
+|         4 | venkata | laxmi     |         4 |
+|        13 | king    | david     |         4 |
+|         1 | joseph  | alex      |         4 |
+|        10 | darla   | ron       |         4 |
+|         8 | anusha  | tellakula |         4 |
+|         2 | jhansi  | rani      |         4 |
+|         9 | alex    | andrews   |         4 |
+|         7 | melody  | roy       |         4 |
+|         3 | joy     | heaven    |         4 |
+|         5 | martin  | luthor    |         4 |
+|         6 | NISSY   | PAUL      |         3 |
+|         5 | DEVI    | SRITHA    |         3 |
+|         4 | venkata | laxmi     |         3 |
+|        13 | king    | david     |         3 |
+|         1 | joseph  | alex      |         3 |
+|        10 | darla   | ron       |         3 |
+|         8 | anusha  | tellakula |         3 |
+|         2 | jhansi  | rani      |         3 |
+|         9 | alex    | andrews   |         3 |
+|         7 | melody  | roy       |         3 |
+|         3 | joy     | heaven    |         3 |
+|         5 | martin  | luthor    |         3 |
+|         6 | NISSY   | PAUL      |         5 |
+|         5 | DEVI    | SRITHA    |         5 |
+|         4 | venkata | laxmi     |         5 |
+|        13 | king    | david     |         5 |
+|         1 | joseph  | alex      |         5 |
+|        10 | darla   | ron       |         5 |
+|         8 | anusha  | tellakula |         5 |
+|         2 | jhansi  | rani      |         5 |
+|         9 | alex    | andrews   |         5 |
+|         7 | melody  | roy       |         5 |
+|         3 | joy     | heaven    |         5 |
+|         5 | martin  | luthor    |         5 |
+|         6 | NISSY   | PAUL      |         6 |
+|         5 | DEVI    | SRITHA    |         6 |
+|         4 | venkata | laxmi     |         6 |
+|        13 | king    | david     |         6 |
+|         1 | joseph  | alex      |         6 |
+|        10 | darla   | ron       |         6 |
+|         8 | anusha  | tellakula |         6 |
+|         2 | jhansi  | rani      |         6 |
+|         9 | alex    | andrews   |         6 |
+|         7 | melody  | roy       |         6 |
+|         3 | joy     | heaven    |         6 |
+|         5 | martin  | luthor    |         6 |
+|         6 | NISSY   | PAUL      |         7 |
+|         5 | DEVI    | SRITHA    |         7 |
+|         4 | venkata | laxmi     |         7 |
+|        13 | king    | david     |         7 |
+|         1 | joseph  | alex      |         7 |
+|        10 | darla   | ron       |         7 |
+|         8 | anusha  | tellakula |         7 |
+|         2 | jhansi  | rani      |         7 |
+|         9 | alex    | andrews   |         7 |
+|         7 | melody  | roy       |         7 |
+|         3 | joy     | heaven    |         7 |
+|         5 | martin  | luthor    |         7 |
+|         6 | NISSY   | PAUL      |         9 |
+|         5 | DEVI    | SRITHA    |         9 |
+|         4 | venkata | laxmi     |         9 |
+|        13 | king    | david     |         9 |
+|         1 | joseph  | alex      |         9 |
+|        10 | darla   | ron       |         9 |
+|         8 | anusha  | tellakula |         9 |
+|         2 | jhansi  | rani      |         9 |
+|         9 | alex    | andrews   |         9 |
+|         7 | melody  | roy       |         9 |
+|         3 | joy     | heaven    |         9 |
+|         5 | martin  | luthor    |         9 |
+|         6 | NISSY   | PAUL      |        14 |
+|         5 | DEVI    | SRITHA    |        14 |
+|         4 | venkata | laxmi     |        14 |
+|        13 | king    | david     |        14 |
+|         1 | joseph  | alex      |        14 |
+|        10 | darla   | ron       |        14 |
+|         8 | anusha  | tellakula |        14 |
+|         2 | jhansi  | rani      |        14 |
+|         9 | alex    | andrews   |        14 |
+|         7 | melody  | roy       |        14 |
+|         3 | joy     | heaven    |        14 |
+|         5 | martin  | luthor    |        14 |
+|         6 | NISSY   | PAUL      |        19 |
+|         5 | DEVI    | SRITHA    |        19 |
+|         4 | venkata | laxmi     |        19 |
+|        13 | king    | david     |        19 |
+|         1 | joseph  | alex      |        19 |
+|        10 | darla   | ron       |        19 |
+|         8 | anusha  | tellakula |        19 |
+|         2 | jhansi  | rani      |        19 |
+|         9 | alex    | andrews   |        19 |
+|         7 | melody  | roy       |        19 |
+|         3 | joy     | heaven    |        19 |
+|         5 | martin  | luthor    |        19 |
+|         6 | NISSY   | PAUL      |        13 |
+|         5 | DEVI    | SRITHA    |        13 |
+|         4 | venkata | laxmi     |        13 |
+|        13 | king    | david     |        13 |
+|         1 | joseph  | alex      |        13 |
+|        10 | darla   | ron       |        13 |
+|         8 | anusha  | tellakula |        13 |
+|         2 | jhansi  | rani      |        13 |
+|         9 | alex    | andrews   |        13 |
+|         7 | melody  | roy       |        13 |
+|         3 | joy     | heaven    |        13 |
+|         5 | martin  | luthor    |        13 |
+|         6 | NISSY   | PAUL      |        16 |
+|         5 | DEVI    | SRITHA    |        16 |
+|         4 | venkata | laxmi     |        16 |
+|        13 | king    | david     |        16 |
+|         1 | joseph  | alex      |        16 |
+|        10 | darla   | ron       |        16 |
+|         8 | anusha  | tellakula |        16 |
+|         2 | jhansi  | rani      |        16 |
+|         9 | alex    | andrews   |        16 |
+|         7 | melody  | roy       |        16 |
+|         3 | joy     | heaven    |        16 |
+|         5 | martin  | luthor    |        16 |
+|         6 | NISSY   | PAUL      |         5 |
+|         5 | DEVI    | SRITHA    |         5 |
+|         4 | venkata | laxmi     |         5 |
+|        13 | king    | david     |         5 |
+|         1 | joseph  | alex      |         5 |
+|        10 | darla   | ron       |         5 |
+|         8 | anusha  | tellakula |         5 |
+|         2 | jhansi  | rani      |         5 |
+|         9 | alex    | andrews   |         5 |
+|         7 | melody  | roy       |         5 |
+|         3 | joy     | heaven    |         5 |
+|         5 | martin  | luthor    |         5 |
++-----------+---------+-----------+-----------+
+
+
+ SELECT A1.FNAME,A1.LNAME, B1.PRODUCTID FROM A1 CROSS JOIN B1 ;
++---------+-----------+-----------+
+| FNAME   | LNAME     | PRODUCTID |
++---------+-----------+-----------+
+| NISSY   | PAUL      |         1 |
+| DEVI    | SRITHA    |         1 |
+| venkata | laxmi     |         1 |
+| king    | david     |         1 |
+| joseph  | alex      |         1 |
+| darla   | ron       |         1 |
+| anusha  | tellakula |         1 |
+| jhansi  | rani      |         1 |
+| alex    | andrews   |         1 |
+| melody  | roy       |         1 |
+| joy     | heaven    |         1 |
+| martin  | luthor    |         1 |
+| NISSY   | PAUL      |         2 |
+| DEVI    | SRITHA    |         2 |
+| venkata | laxmi     |         2 |
+| king    | david     |         2 |
+| joseph  | alex      |         2 |
+| darla   | ron       |         2 |
+| anusha  | tellakula |         2 |
+| jhansi  | rani      |         2 |
+| alex    | andrews   |         2 |
+| melody  | roy       |         2 |
+| joy     | heaven    |         2 |
+| martin  | luthor    |         2 |
+| NISSY   | PAUL      |         4 |
+| DEVI    | SRITHA    |         4 |
+| venkata | laxmi     |         4 |
+| king    | david     |         4 |
+| joseph  | alex      |         4 |
+| darla   | ron       |         4 |
+| anusha  | tellakula |         4 |
+| jhansi  | rani      |         4 |
+| alex    | andrews   |         4 |
+| melody  | roy       |         4 |
+| joy     | heaven    |         4 |
+| martin  | luthor    |         4 |
+| NISSY   | PAUL      |         3 |
+| DEVI    | SRITHA    |         3 |
+| venkata | laxmi     |         3 |
+| king    | david     |         3 |
+| joseph  | alex      |         3 |
+| darla   | ron       |         3 |
+| anusha  | tellakula |         3 |
+| jhansi  | rani      |         3 |
+| alex    | andrews   |         3 |
+| melody  | roy       |         3 |
+| joy     | heaven    |         3 |
+| martin  | luthor    |         3 |
+| NISSY   | PAUL      |         5 |
+| DEVI    | SRITHA    |         5 |
+| venkata | laxmi     |         5 |
+| king    | david     |         5 |
+| joseph  | alex      |         5 |
+| darla   | ron       |         5 |
+| anusha  | tellakula |         5 |
+| jhansi  | rani      |         5 |
+| alex    | andrews   |         5 |
+| melody  | roy       |         5 |
+| joy     | heaven    |         5 |
+| martin  | luthor    |         5 |
+| NISSY   | PAUL      |         6 |
+| DEVI    | SRITHA    |         6 |
+| venkata | laxmi     |         6 |
+| king    | david     |         6 |
+| joseph  | alex      |         6 |
+| darla   | ron       |         6 |
+| anusha  | tellakula |         6 |
+| jhansi  | rani      |         6 |
+| alex    | andrews   |         6 |
+| melody  | roy       |         6 |
+| joy     | heaven    |         6 |
+| martin  | luthor    |         6 |
+| NISSY   | PAUL      |         7 |
+| DEVI    | SRITHA    |         7 |
+| venkata | laxmi     |         7 |
+| king    | david     |         7 |
+| joseph  | alex      |         7 |
+| darla   | ron       |         7 |
+| anusha  | tellakula |         7 |
+| jhansi  | rani      |         7 |
+| alex    | andrews   |         7 |
+| melody  | roy       |         7 |
+| joy     | heaven    |         7 |
+| martin  | luthor    |         7 |
+| NISSY   | PAUL      |         9 |
+| DEVI    | SRITHA    |         9 |
+| venkata | laxmi     |         9 |
+| king    | david     |         9 |
+| joseph  | alex      |         9 |
+| darla   | ron       |         9 |
+| anusha  | tellakula |         9 |
+| jhansi  | rani      |         9 |
+| alex    | andrews   |         9 |
+| melody  | roy       |         9 |
+| joy     | heaven    |         9 |
+| martin  | luthor    |         9 |
+| NISSY   | PAUL      |        14 |
+| DEVI    | SRITHA    |        14 |
+| venkata | laxmi     |        14 |
+| king    | david     |        14 |
+| joseph  | alex      |        14 |
+| darla   | ron       |        14 |
+| anusha  | tellakula |        14 |
+| jhansi  | rani      |        14 |
+| alex    | andrews   |        14 |
+| melody  | roy       |        14 |
+| joy     | heaven    |        14 |
+| martin  | luthor    |        14 |
+| NISSY   | PAUL      |        19 |
+| DEVI    | SRITHA    |        19 |
+| venkata | laxmi     |        19 |
+| king    | david     |        19 |
+| joseph  | alex      |        19 |
+| darla   | ron       |        19 |
+| anusha  | tellakula |        19 |
+| jhansi  | rani      |        19 |
+| alex    | andrews   |        19 |
+| melody  | roy       |        19 |
+| joy     | heaven    |        19 |
+| martin  | luthor    |        19 |
+| NISSY   | PAUL      |        13 |
+| DEVI    | SRITHA    |        13 |
+| venkata | laxmi     |        13 |
+| king    | david     |        13 |
+| joseph  | alex      |        13 |
+| darla   | ron       |        13 |
+| anusha  | tellakula |        13 |
+| jhansi  | rani      |        13 |
+| alex    | andrews   |        13 |
+| melody  | roy       |        13 |
+| joy     | heaven    |        13 |
+| martin  | luthor    |        13 |
+| NISSY   | PAUL      |        16 |
+| DEVI    | SRITHA    |        16 |
+| venkata | laxmi     |        16 |
+| king    | david     |        16 |
+| joseph  | alex      |        16 |
+| darla   | ron       |        16 |
+| anusha  | tellakula |        16 |
+| jhansi  | rani      |        16 |
+| alex    | andrews   |        16 |
+| melody  | roy       |        16 |
+| joy     | heaven    |        16 |
+| martin  | luthor    |        16 |
+| NISSY   | PAUL      |         5 |
+| DEVI    | SRITHA    |         5 |
+| venkata | laxmi     |         5 |
+| king    | david     |         5 |
+| joseph  | alex      |         5 |
+| darla   | ron       |         5 |
+| anusha  | tellakula |         5 |
+| jhansi  | rani      |         5 |
+| alex    | andrews   |         5 |
+| melody  | roy       |         5 |
+| joy     | heaven    |         5 |
+| martin  | luthor    |         5 |
++---------+-----------+-----------+
+156 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
