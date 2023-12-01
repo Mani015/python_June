@@ -1,0 +1,12 @@
+
+
+1).Create project
+2). Create app
+3).Create template
+    we have to create outside of the project folder
+    In this folder we have to loaded html files
+4).views
+5).urls
+6).settings.py
+7.runserver
+
