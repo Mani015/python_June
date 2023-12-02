@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <title>Title</title>
+</head>
+<body>
+<h1>welcome to Dmart</h1>
+<ol>
+    <li>Product_name : {{Product_Name}}</li>
+    <li>Product_Color : {{Product_Color}}</li>
+    <li>Product_Cost : {{Product_price}}</li>
+</ol>
+
+<img src="{% static  'dmart.jpg' %}">
+<br>
+<a href="/">Home</a>
+</body>
+</html>
