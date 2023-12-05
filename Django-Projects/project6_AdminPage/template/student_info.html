@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Student Details:</h2>
+{% if info %}
+<table border="3">
+    <thead>
+    <th>SID</th>
+    <th>Student_Name</th>
+    <th>Student_Marks</th>
+    <th>Student_Location</th>
+    </thead>
+    {% for i in info %}
+    <tr>
+        <td>{{i.Sid}}</td>
+        <td>{{i.Sname}}</td>
+        <td>{{i.Smarks}}</td>
+        <td>{{i.Slocation}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>No Student records here!</h3>
+{% endif %}
+</body>
+</html>

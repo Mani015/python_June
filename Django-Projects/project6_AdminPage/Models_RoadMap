@@ -1,0 +1,15 @@
+1).create project
+2).create app
+3).template inside project folder
+4).models
+5).views
+6).template
+7).Settings
+  a).installed apps
+  b).Database
+  c).template_DIRS
+8).Open terminal
+  a).py manage.py makemigration
+  b).py manage.py migrate
+9).urls
+10).runserver
