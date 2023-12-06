@@ -1,0 +1,230 @@
+ORM(Object Relational Mapping)
+
+(venv) PS C:\Users\Test\PycharmProjects\pythonProject\Django_12pm\model> py manage.py shell
+Type "help", "copyright", "credits" or "license" for more information.
+>>> >>> from appone.models import Student_Info
+>>> d1 = Student_Info.objects.all()
+>>> print(d1)
+<QuerySet [<Student_Info: Student_Info object (1)>, <Student_Info: Student_Info object (2)>, <Student_Info:
+ Student_Info object (3)>, <Student_Info: Student_Info object (4)>]>
+>>> print(type(d1))
+<class 'django.db.models.query.QuerySet'>
+--------------------------------------------------------------------------------------------------------
+HOW TO GET EMPLOYEE DETAILS:
+
+ x2 = Student_Info.objects.get(Firstname='hema')
+>>> print(x2)
+Student_Info object (1)
+>>> x2 = Student_Info.objects.get(Lastname='hema')
+Traceback (most recent call last):
+ne 87, in manager_method
+appone.models.Student_Info.DoesNotExist: Student_Info matching query does not exist.
+>>> x2 = Student_Info.objects.get(Lastname='kr')
+>>> print(x2)
+...   print(i.items())
+
+kr
+def
+melody
+...
+20
+100
+...   print(i)
+...
+Traceback (most recent call last):
+...   print(i.Lastname)
+...
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+...
+hema kr 20 hemalatha0454@gmail.com
+abc def 100 abc@gmail.com
+ron melody 100 ron@gmail.com
+>>> for i in x2:
+...   print(i)
+...
+Student_Info object (1)
+Student_Info object (2)
+Student_Info object (3)
+Student_Info object (4)
+----------------------------------------------------------------------------------------------------
+Filtering data:
+1.gt=(greater than)
+2.gte=(greater than equal)
+3.contains
+4.icontains
+5.in
+6.endwith
+================
+1.GT
+ z=employee.objects.filter(salary__gt=10000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (6)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>, <employee: employee object (10)>]>
+>>> z=employee.objects.filter(salary__gt=20000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (6)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>]>
+----------------------------------------------
+2.GTE
+ z=employee.objects.filter(salary__gt=10000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (6)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>, <employee: employee object (10)>]>
+>>> z=employee.objects.filter(salary__gt=20000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (6)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>]>
+>>> z=employee.objects.filter(salary__gte=50000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>]>
+>>> z=employee.objects.filter(salary__gte=30000)
+>>> print(z)
+<QuerySet [<employee: employee object (5)>, <employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>]>
+>>> z=employee.objects.filter(salary__gte=60000)
+>>> print(z)
+<QuerySet [<employee: employee object (7)>, <employee: employee object (8)>, <employee: employee object (9)>]>
+-----------------------------------------------------------------------------------------------------------------
+3)LTE
+ z=employee.objects.filter(salary__lte=60000)
+>>> print(z)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (2)>, <employee: employee object (3)>, <employee: employee object (4)>, <employee: employee object (5)>, <employee: employee object (6)>, <employee: employee object (9)>, <employee: employee object (10)>]>
+>>> z=employee.objects.filter(salary__lte=40000)
+>>> print(z)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (2)>, <employee: employee object (3)>, <employee: employee object (4)>, <employee: employee object (6)>, <employee: employee object (10)>]>
+---------------------------------------------------------------------------------------------------------------------------
+4)contains: Insentive search -->we see the querry
+ x=employee.objects.get(FirstName__contains='vijay')
+>>> print(x)
+employee object (2)
+>>> x=employee.objects.get(FirstName__contains='bharath')
+>>> print(x)
+employee object (7)
+------------------------------------------------
+5)icontains= Is the case Insensitive
+ x=employee.objects.get(FirstName__icontains='Bharath')
+>>> print(x)
+employee object (7)
+>>> x=employee.objects.get(FirstName__icontains='vijay')
+>>> print(x)
+employee object (2)
+>>> x=employee.objects.get(FirstName__icontains='Ashok')
+>>> print(x)
+employee object (1)
+---------------------------------------------------------------------------------
+6)IN
+ x=employee.objects.filter(id__in=[1,2])
+>>> print(x)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (2)>]>
+>>> x=employee.objects.filter(id__in=[1,5])
+>>> print(x)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (5)>]>
+>>> x=employee.objects.filter(id__in=[1,11])
+>>> print(x)
+<QuerySet [<employee: employee object (1)>]>
+>>> x=employee.objects.filter(id__in=[1,8])
+>>> print(x)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (8)>]>
+--------------------------------------------------------------------------------------------------------
+USING LOGICAL OPERATORS
+1).OR--[|]
+ s=employee.objects.filter(FirstName__startswith='as')|employee.objects.filter(LastName__startswith='ar')
+>>> print(s)
+<QuerySet [<employee: employee object (1)>]>
+>>> s=employee.objects.filter(FirstName__startswith='su')|employee.objects.filter(LastName__startswith='u')
+>>> print(s)
+<QuerySet [<employee: employee object (10)>]>
+>>> s=employee.objects.filter(FirstName__startswith='bh')|employee.objects.filter(LastName__startswith='ku')
+>>> print(s)
+<QuerySet [<employee: employee object (1)>, <employee: employee object (3)>, <employee: employee object (6)>, <employee: employee object (7)>]>
+--------------------------------------------------------------------------------
+AND:
+C:\Users\DELL\Visual code\Django-Project\projectfive\env\Scripts\projectfive>python manage.py shell
+Python 3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from app1.models import employee
+>>> a=employee.objects.filter(FirstName__startswith='sa')& employee.objects.filter(LastName__startswith='ku')
+>>> print(a)
+<QuerySet [<employee: employee object (3)>]>
+>>> a=employee.objects.filter(FirstName__startswith='ash')& employee.objects.filter(LastName__startswith='ku')
+>>> print(a)
+<QuerySet [<employee: employee object (1)>]>
+>>> a=employee.objects.filter(FirstName__startswith='ma')& employee.objects.filter(LastName__startswith='ku')
+>>> print(a)
+<QuerySet []>
+------------------------------------------------------------------------------------------------------------------
+SELECT colums:
+ emp=employee.objects.all().values('FirstName')
+>>> print(emp)
+<QuerySet [{'FirstName': 'ashok'}, {'FirstName': 'vijay'}, {'FirstName': 'sampath'}, {'FirstName': 'santhos'}, {'FirstName': 'sagar'}, {'FirstName': 'vinod'}, {'FirstName': 'bharath'}, {'FirstName': 'david'}, {'FirstName': 'john'}, {'FirstName': 'suresh'}]>
+>>> emp=employee.objects.all().values('LastName')
+>>> print(emp)
+<QuerySet [{'LastName': 'kumar'}, {'LastName': 'varma'}, {'LastName': 'kumar'}, {'LastName': 'babu'}, {'LastName': 'naidu'}, {'LastName': 'kumar'}, {'LastName': 'kumar'}, {'LastName': 'roy'}, {'LastName': 'wilson'}, {'LastName': 'sharma'}]>
+>>> emp=employee.objects.all().values('salary')
+>>> print(emp)
+<QuerySet [{'salary': 10000}, {'salary': 2000}, {'salary': 3000}, {'salary': 4000}, {'salary': 50000}, {'salary': 25000}, {'salary': 70000}, {'salary': 80000}, {'salary': 60000}, {'salary': 20000}]>
+-----------------------------------------------------------------------------------------------
+AGGREGATE FUNCTION
+
+C:\Users\DELL\Visual code\Django-Project\projectfive\env\Scripts\projectfive>python manage.py shell
+Python 3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from app1.models import employee
+>>> from django.db.models import Avg,Sum,Max,Min,Count
+>>> avg=employee.objects.all().aggregate(Avg('salary'))
+>>> print(avg)
+{'salary__avg': 32400.0}
+>>> avg=employee.objects.all().aggregate(Sum('salary'))
+>>> print(avg)
+{'salary__sum': 324000}
+>>> avg=employee.objects.all().aggregate(Max('salary'))
+>>> print(avg)
+{'salary__max': 80000}
+>>> min=employee.objects.all().aggregate(Min('salary'))
+>>> print(min)
+{'salary__min': 2000}
+>>> count=employee.objects.all().aggregate(Count('salary'))
+>>> print(count)
+{'salary__count': 10}
+---------------------------------------------------------------------------------------------------------------------
+SINGLE DATA INSERTED:
+from appone.models import Student_Info
+>>> >>> add1 = Student_Info(Firstname='sai',Lastname='vinod',Marks=99,Email='sai@gmail.com')
+>>> add1.save()
+>>> add1 = Student_Info(Firstname='vishal',Lastname='Bhai',Marks=99,Email='vishal@gmail.com')
+>>> add1.save()
+----------------------------------------------------------------------------------------------------
+BULK CREATE:
+SYNTAX: Modelsclassname.objects.bulk_create([])
+
+data = Student_Info.objects.bulk_create([Student_Info(Firstname='madhu',Lastname='babu',Marks=100,Email
+='madhu@gmail.com'),Student_Info(Firstname='dinesh',Lastname='Kumar',Marks=97,Email='Dinesh@gmail.com')]) 
+-------------------------------------------------------------------------------------------------------------------
+DELETE SINGLE DATA:
+ d1 = Student_Info.objects.get(id=5)
+>>> d1.delete()
+(1, {'appone.Student_Info': 1})
+
+> d1 = Student_Info.objects.get(Firstname='ABC')
+>>> d1.delete()
+(1, {'appone.Student_Info': 1})
+
+-------------------------------------------------------------
+BULK DELETE:
+d2 = Student_Info.objects.filter(Marks__lte=100)
+>>> d2.count()
+6
+>>> d2.delete()
+(6, {'appone.Student_Info': 6})
+-------------------------------------------------------------------------
+Update data:
+e1 = Student_Info.objects.get(id=12)
+>>> e1.Firstname
+'madhu'
+>>> e1.Firstname = 'chandra'
+>>> e1.save()
+
+
+> e1.Marks = 100
+>>> e1.save()
+>>> e1.Marks = 90
+>>> e1.save()
+
