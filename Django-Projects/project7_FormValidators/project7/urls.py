@@ -20,5 +20,5 @@ from AppOne import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/',views.Applicationform)
+    path('user/',views.Customer_Data)
 ]

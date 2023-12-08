@@ -1,19 +1,17 @@
 from django.shortcuts import render
-from .import forms
+from AppOne  import forms
 # Create your views here.
 
-def Applicationform(request):
-    f1 = forms.Application()
+def Customer_Data(request):
+    form = forms.Customer()
     if request.method == 'POST':
-        form = forms.Application(request.POST)  # request.POST : taken all income user details
+        form = forms.Customer(request.POST)
         if form.is_valid():
-            print('Form is valid')
-            print('ID :',form.cleaned_data['Id'])
-            print('Firstname :', form.cleaned_data['Firstname'])
-            print('Lastname :', form.cleaned_data['Lastname'])
-            print('Mobilenumber :', form.cleaned_data['Mobile_No'])
-            print('Email :', form.cleaned_data['Email'])
-    return render(request,'template/Application.html',{'form':f1})
+            print('Form is Success')
+            print('Firstname = ',form.cleaned_data['Firstname'])
+            print('Lastname = ', form.cleaned_data['Lastname'])
+            print('Age = ', form.cleaned_data['Age'])
+    return render(request,'template/Application.html',{'form':form})
 
 
 
