@@ -1,21 +1,24 @@
 from django.shortcuts import render
-from AppOne  import forms
+from AppOne.models import Product
+from AppOne.forms import ProductForm
 # Create your views here.
 
-def Customer_Data(request):
-    form = forms.Customer()
+
+def index(request):
+    return render(request,'index.html')
+
+
+def productlist(request):
+    var = Product.objects.all()  # select * from table_name
+    return render(request,'listproduct.html',{'var':var})
+
+
+
+def Addproduct(request):
+    var1 = ProductForm()
     if request.method == 'POST':
-        form = forms.Customer(request.POST)
-        if form.is_valid():
-            print('Form is Success')
-            print('Firstname = ',form.cleaned_data['Firstname'])
-            print('Lastname = ', form.cleaned_data['Lastname'])
-            print('Age = ', form.cleaned_data['Age'])
-    return render(request,'template/Application.html',{'form':form})
-
-
-
-
-# Cleaned_data is an object, not a function. From the Django docs: A Form instance has an is_valid() method,
-# which runs validation routines for all its fields.
-# When this method is called, if all fields contain valid data, it will: return True.
+        form = ProductForm(request.POST)  #request.POST: It will submit data posted in HTML form elements.
+        if form.is_valid():  #is_valid(): This function validates the form data against model field types and options.
+            form.save()   # save(): This function saves the data in the database.
+        return index(request)
+    return render(request,'addproject.html',{'var1':var1})

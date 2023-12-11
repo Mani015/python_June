@@ -1,0 +1,24 @@
+1).Models
+2).Forms
+3).views(Productlist)
+4).listproduct.html
+5).views(addproduct)
+6).Addproduct.html
+7).settings.py
+    Installed_apps
+    Template_DIRS
+    DataBase
+
+8).Go to terminal do this commands
+     a).py manage.py shell
+     b). from django.db import connection
+     c). x = connection.cursor()
+     d). print(x)
+
+9).py manage.py makemigrations
+   py manage.py migrate
+
+10). load urls
+
+11).index in views page
+

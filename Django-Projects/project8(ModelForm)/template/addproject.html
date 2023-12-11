@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Add your products</h2>
+<form method="post">
+  <table>
+  {{ var1.as_table }}
+    {% csrf_token %}
+  </table>
+    <input type="Submit" name=" " value="Save">
+</form>
+</body>
+</html>
+
+
+<!--method="POST": It refers to the HTTP POST request. The default is GET.
+csrf_token: It is a security token to prevent Cross-site reference forgery.
+The form requires a submit button apart from model field elements, to trigger form submission.-->
