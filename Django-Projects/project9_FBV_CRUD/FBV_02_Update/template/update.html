@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+</head>
+<body>
+<h2>Update Employee_Details: </h2>
+<form method="post">
+  <table>
+  {{stu.as_table}}
+    {% csrf_token %}
+    Firstname : <ol><input type="text" name="Firstname" value="{{stu.Firstname}}"/></ol>
+      Lastname : <ol><input type="text" name="Lastname" value="{{stu.Lastname}}"/></ol>
+       Salary : <ol><input type="text" name="Salary" value="{{stu.Salary}}"/></ol>
+       Domain : <ol><input type="text" name="Domain" value="{{stu.Domain}}"/></ol>
+       Experience : <ol><input type="text" name="Experience" value="{{stu.Experience}}"/></ol>
+  </table>
+    <br/><br/>
+    <input type="submit" name="" value="Save">
+</form>
+
+</body>
+</html>
