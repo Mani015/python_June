@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+<div class="container" align="center">
+<h3>Employee Details:</h3>
+{% if var %}
+
+<table border="3">
+    <thead>
+    <th>ID</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Salary</th>
+    <th>Domain</th>
+    <th>Experience</th>
+    </thead>
+    {% for i in var %}
+    <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.Firstname}}</td>
+        <td>{{i.Lastname}}</td>
+        <td>{{i.Salary}}</td>
+        <td>{{i.Domain}}</td>
+        <td>{{i.Experience}}</td>
+        <td><a href="/delete/{{i.id}}" class="btn btn-primary btn-lg">Delete</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>No Records</h3>
+{% endif %}
+<br/><br/>
+
+<a href="/create">Add Employee</a>
+    </div>
+</body>
+</html>

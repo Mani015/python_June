@@ -1,0 +1,9 @@
+FBV--> Function Based Views
+1).models.py
+2).forms.py
+3). views.py
+    index.html
+4).settings.py
+5).Migrations
+6).urls.py
+
