@@ -1,0 +1,10 @@
+We have do a small curd opperation by using CBV
+
+1).Models
+2).Views
+from django.views.generic import ListView
+3).Template ---> student_list.html
+4).settings
+5).Migrations
+6).urls and run the server
+
