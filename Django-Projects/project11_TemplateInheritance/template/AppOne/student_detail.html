@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'AppOne\base.html'%}
+{% block body_block %}
+
+<div class="container" align="center">
+<h3>Student Details</h3>
+<ol>
+  <h3><li>Firstname: {{student.Firstname}}</li></h3>
+  <h3><li>Lastname: {{student.Lastname}}</li></h3>
+  <h3><li>Email: {{student.Email}}</li></h3>
+  <h3><li>Marks: {{student.Marks}}</li></h3>
+    <h3><li><a href="/update/{{student.id}}" class="btn btn-primary btn-lg">Update</a></li></h3>
+    <h3><li><a href="/delete/{{student.id}}" class="btn btn-primary btn-lg">Delete</a></li></h3>
+</ol>
+<br/><br/>
+<a href="/">Back</a>
+    </div>
+{% endblock %}

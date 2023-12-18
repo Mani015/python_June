@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'AppOne\base.html'%}
+{% block body_block %}
+<div class="container" align="center">
+<h1>Student ListView:</h1>
+<table border="3">
+    <thead>
+    <th>Id</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Marks</th>
+    </thead>
+    {% for stu in student_list %}
+    <tr>
+        <td><a href="/{{stu.id}}" >{{stu.id}}</a></td>
+        <td>{{stu.Firstname}}</td>
+        <td>{{stu.Lastname}}</td>
+        <td>{{stu.Email}}</td>
+        <td>{{stu.Marks}}</td>
+
+    </tr>
+    {% endfor %}
+</table><br/><br/>
+    <a href="/create">Add Student</a>
+
+</div>
+{% endblock %}

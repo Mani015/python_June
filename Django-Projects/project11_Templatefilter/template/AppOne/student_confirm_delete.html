@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends 'AppOne\base.html'%}
+{% block body_block %}
+<h2>Delete Student {{student.Firstname}}</h2>
+<form method="post">
+    <input type="submit" name="" value="Confirm" >
+    {% csrf_token %}
+    <br/>
+    <a href="/{{student.id}}" class="btn btn-primary btn-lg">Cancel</a>
+</form>
+
+{% endblock %}
